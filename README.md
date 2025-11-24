@@ -1,54 +1,21 @@
-# Apartment Valuation Project
+# Định Giá Căn Hộ Bằng Giải Thuật Di Truyền (GA)
 
-This project implements a genetic algorithm for apartment valuation using machine learning techniques. The goal is to estimate the value of apartments based on various features and historical data.
+Dự án sử dụng **Giải thuật Di truyền** để tối ưu trọng số mô hình hồi quy tuyến tính, thay vì Gradient Descent.
 
-## Project Structure
+Mục tiêu: Dự đoán giá căn hộ dựa trên diện tích, số phòng, vị trí, tiện ích...
 
-```
-du_an_dinh_gia_can_ho
-├── data
-│   └── bo_du_lieu_can_ho.csv          # Dataset used for apartment valuation
-├── ga
-│   ├── __init__.py                     # Marks the ga directory as a Python package
-│   ├── population.py                    # Manages a collection of individuals for the genetic algorithm
-│   ├── fitness.py                       # Functions to calculate fitness of individuals
-│   ├── selection.py                     # Implements selection methods for the genetic algorithm
-│   ├── crossover.py                     # Defines crossover functions for producing offspring
-│   ├── mutation.py                      # Contains mutation functions for introducing variability
-│   └── run_ga.py                        # Main execution script for running the genetic algorithm
-├── ml_model
-│   ├── __init__.py                     # Marks the ml_model directory as a Python package
-│   └── train_model.py                  # Functions for training a machine learning model
-├── main.py                              # Entry point of the application
-├── requirements.txt                     # Lists dependencies required for the project
-└── README.md                            # Documentation for the project
-```
+---
 
-## Setup Instructions
+### Cách chạy
 
-1. Clone the repository:
-   ```
-   git clone <repository-url>
-   cd du_an_dinh_gia_can_ho
-   ```
+pip install pandas numpy scikit-learn matplotlib streamlit
+streamlit run app.py
 
-2. Install the required dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
-
-## Usage
-
-To run the project, execute the `main.py` file:
-```
-python main.py
-```
-
-## Modules Description
-
-- **GA Module**: Implements the genetic algorithm components including population management, fitness evaluation, selection, crossover, and mutation.
-- **ML Model Module**: Handles the training of machine learning models using the provided dataset, including preprocessing and evaluation.
-
-## License
-
-This project is licensed under the MIT License.
+Các bước và Mô tả
+1. Khởi tạo quần thể:Tạo ngẫu nhiên 200 cá thể (mỗi cá thể là một bộ trọng số + bias)
+2. Hàm đánh giá (Fitness): Fitness = 1 / (1 + MAE) → MAE càng nhỏ → Fitness càng cao
+3. Chọn lọc (Selection): Tournament Selection (k=3): chọn cá thể tốt nhất từ 3 ứng viên ngẫu nhiên
+4. Lai ghép (Crossover): Single-point crossover với tỷ lệ 85%
+5. Đột biến (Mutation): Mỗi gen có 10% cơ hội bị thay đổi bằng nhiễu Gaussian
+6. Lặp lại: Tối đa 500 thế hệ, có Early Stopping nếu không cải thiện sau 50 thế hệ
+7. Kết quả: Trả về bộ trọng số tốt nhất → dùng để dự đoán giá căn hộ mới
