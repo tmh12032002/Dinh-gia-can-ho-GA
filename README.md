@@ -9,6 +9,7 @@ Mục tiêu: Dự đoán giá căn hộ dựa trên diện tích, số phòng, v
 ### Cách chạy
 
 pip install pandas numpy scikit-learn matplotlib streamlit
+
 streamlit run app.py
 
 Các bước và Mô tả
